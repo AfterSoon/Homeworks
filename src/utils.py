@@ -28,6 +28,6 @@ def create_objects_from_json(data):
 
 if __name__ == '__main__':
     raw_data = read_json(products_path)
-    # print(raw_data)
+    print(raw_data)
     categories_data = create_objects_from_json(raw_data)
     print(categories_data)
