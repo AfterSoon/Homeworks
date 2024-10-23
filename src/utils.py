@@ -1,8 +1,9 @@
 import json
 import os
-from src.product import Product
-from src.category import Category
 from typing import Any
+
+from src.category import Category
+from src.product import Product
 
 
 def get_data_by_products(file_path: str = "../data/products.json") -> Any:

@@ -1,5 +1,6 @@
-from unittest.mock import patch, Mock, mock_open
-from src.utils import get_data_by_products
+from unittest.mock import mock_open, patch
+
+from src.utils import create_object_products, get_data_by_products
 
 
 def test_get_data_by_products():
@@ -18,3 +19,8 @@ def test_get_data_by_products():
                 ],
             }
         ]
+
+
+def test_data(get_data):
+    result = create_object_products(get_data)
+    assert result[0].name == "Смартфоны"
