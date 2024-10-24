@@ -1,10 +1,31 @@
-def test_category_init(first_category, second_category):
-    assert first_category.name == "Смартфоны"
-    assert first_category.description == "Смартфоны, как средство не только коммуникации, но и получения дополнительных функций для удобства жизни"
-    assert len(first_category.products) == 3
+import pytest
 
-    assert first_category.category_count == 2
-    assert second_category.category_count == 2
+from src.product import Product
 
-    assert first_category.product_count == 4
-    assert second_category.product_count == 4
+
+def test_category_init(category_fruit, apple, pineapple):
+    assert category_fruit.name == "Fruits"
+    assert category_fruit.description == "Сбор урожая - 2024"
+    assert category_fruit.products == "Green apple, 115.2 руб. Остаток: 30 шт.\nPineapple, 460 руб. Остаток: 10 шт.\n"
+
+    assert category_fruit.category_count == 1
+    assert category_fruit.product_count == 2
+
+
+@pytest.mark.parametrize(
+    "product",
+    [
+        (Product("Samsung Galaxy S23 Ultra", "256GB, Серый цвет, 200MP камера", 180000.0, 5)),
+        (Product(name="Pineapple", description="Страна-поставщик Коста-Рика", price=460, quantity=10)),
+    ],
+)
+def test_add_product_setter(category_fruit, product):
+    assert category_fruit.add_product(product) == None
+
+
+def test_category_str(category_fruit):
+    assert str(category_fruit) == "Fruits, количество продуктов: 40 шт."
+
+
+def test_products_in_list(category_fruit):
+    assert str(category_fruit.products_in_list[0]) == "Green apple, 115.2 руб. Остаток: 30 шт.\n"
