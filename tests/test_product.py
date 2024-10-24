@@ -29,3 +29,11 @@ def test_new_price(capsys, apple):
     assert apple.price == 1000
     apple.price = 1
     assert apple.price == 1
+
+
+def test_product_str(apple):
+    assert str(apple) == "Green apple, 115.2 руб. Остаток: 30 шт.\n"
+
+
+def test_product_add(apple, pineapple):
+    assert apple + pineapple == 8056.0

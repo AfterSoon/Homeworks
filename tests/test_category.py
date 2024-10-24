@@ -20,4 +20,12 @@ def test_category_init(category_fruit, apple, pineapple):
     ],
 )
 def test_add_product_setter(category_fruit, product):
-    assert category_fruit.add_product(product) == product
+    assert category_fruit.add_product(product) == None
+
+
+def test_category_str(category_fruit):
+    assert str(category_fruit) == "Fruits, количество продуктов: 40 шт."
+
+
+def test_products_in_list(category_fruit):
+    assert str(category_fruit.products_in_list[0]) == "Green apple, 115.2 руб. Остаток: 30 шт.\n"

@@ -13,6 +13,12 @@ class Product:
         self.__price = price
         self.quantity = quantity
 
+    def __str__(self) -> str:
+        return f"{self.name}, {self.__price} руб. Остаток: {self.quantity} шт.\n"
+
+    def __add__(self, other: Any) -> Any:
+        return self.__price * self.quantity + other.price * other.quantity
+
     @classmethod
     def new_product(cls, dict_product: dict) -> Any:
 
