@@ -31,19 +31,22 @@ class Category:
         return product_str
 
     @property
-    def products_in_list(self):
+    def products_in_list(self) -> list:
         return self.__products
 
     def add_product(self, product: Product) -> None:
         name_products = []
-        for product_class in self.__products:
-            name_products.append(product_class.name)
-        if product.name not in name_products:
-            self.__products.append(product)
-            Category.product_count += 1
-        else:
+        if isinstance(product, Product) or issubclass(type(product), Product):
             for product_class in self.__products:
-                if product.name == product_class.name:
-                    product_class.quantity += product.quantity
-                    if product_class.price < product.price:
-                        product_class.price = product.price
+                name_products.append(product_class.name)
+            if product.name not in name_products:
+                self.__products.append(product)
+                Category.product_count += 1
+            else:
+                for product_class in self.__products:
+                    if product.name == product_class.name:
+                        product_class.quantity += product.quantity
+                        if product_class.price < product.price:
+                            product_class.price = product.price
+        else:
+            raise TypeError

@@ -1,3 +1,5 @@
+import pytest
+
 from src.product import Product
 
 
@@ -37,3 +39,8 @@ def test_product_str(apple):
 
 def test_product_add(apple, pineapple):
     assert apple + pineapple == 8056.0
+
+
+def test_smarthphone_lawn_grass_add(smartphone, grass):
+    with pytest.raises(TypeError):
+        result = smartphone + grass

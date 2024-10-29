@@ -1,6 +1,6 @@
-from src.category import Category
-
 from typing import Any
+
+from src.category import Category
 
 
 class CategoryIterator:

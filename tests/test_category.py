@@ -29,3 +29,8 @@ def test_category_str(category_fruit):
 
 def test_products_in_list(category_fruit):
     assert str(category_fruit.products_in_list[0]) == "Green apple, 115.2 руб. Остаток: 30 шт.\n"
+
+
+def test_product_add_error(apple):
+    with pytest.raises(TypeError):
+        result = apple + "string"
