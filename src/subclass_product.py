@@ -1,7 +1,10 @@
+from typing import Any
+
+from src.print_mixin import PrintMixin
 from src.product import Product
 
 
-class Smartphone(Product):
+class Smartphone(Product, PrintMixin):
 
     def __init__(
         self,
@@ -20,14 +23,14 @@ class Smartphone(Product):
         self.memory = memory
         self.color = color
 
-    # def __add__(self, other):
-    #     # if type(self) == type(other):
-    #     #     return self.price * self.quantity + other.price * other.quantity
-    #     # else:
-    #     #     raise TypeError
+    def __add__(self, other: Any) -> Any:
+        if type(self) == type(other):
+            return self.price * self.quantity + other.price * other.quantity
+        else:
+            raise TypeError
 
 
-class LawnGrass(Product):
+class LawnGrass(Product, PrintMixin):
 
     def __init__(
         self,
