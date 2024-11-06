@@ -1,5 +1,6 @@
 import pytest
 
+from src.category import Category
 from src.product import Product
 
 
@@ -34,3 +35,9 @@ def test_products_in_list(category_fruit):
 def test_product_add_error(apple):
     with pytest.raises(TypeError):
         result = apple + "string"
+
+
+def test_middle_price(category_fruit):
+    assert category_fruit.middle_price() == 287.6
+    category1 = Category("Smartphone", "Sumsung", [])
+    assert category1.middle_price() == 0

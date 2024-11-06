@@ -1,3 +1,6 @@
+from typing import Any
+
+from src.exceptions import NoneQuantity
 from src.product import Product
 
 
@@ -36,17 +39,29 @@ class Category:
 
     def add_product(self, product: Product) -> None:
         name_products = []
-        if isinstance(product, Product) or issubclass(type(product), Product):
-            for product_class in self.__products:
-                name_products.append(product_class.name)
-            if product.name not in name_products:
-                self.__products.append(product)
-                Category.product_count += 1
-            else:
+        if product.quantity != 0:
+            if isinstance(product, Product) or issubclass(type(product), Product):
                 for product_class in self.__products:
-                    if product.name == product_class.name:
-                        product_class.quantity += product.quantity
-                        if product_class.price < product.price:
-                            product_class.price = product.price
+                    name_products.append(product_class.name)
+                if product.name not in name_products:
+                    self.__products.append(product)
+                    Category.product_count += 1
+                else:
+                    for product_class in self.__products:
+                        if product.name == product_class.name:
+                            product_class.quantity += product.quantity
+                            if product_class.price < product.price:
+                                product_class.price = product.price
+            else:
+                raise TypeError
         else:
-            raise TypeError
+            raise NoneQuantity
+
+    def middle_price(self) -> Any:
+        sum_product = sum(i.price for i in self.__products)
+        try:
+            result = round((sum_product / len(self.__products)), 2)
+        except ZeroDivisionError:
+            return 0
+        else:
+            return result

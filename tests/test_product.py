@@ -15,6 +15,11 @@ def test_product_init(apple, pineapple):
     assert pineapple.quantity == 10
 
 
+def test_product_init_value_error():
+    with pytest.raises(ValueError):
+        Product("Sumsung", "Calaxy S23", 120000, 0)
+
+
 def test_new_product():
     name_product = Product.new_product({"name": "apple", "description": "green apple", "price": 13, "quantity": 12})
     assert name_product.name == "apple"
