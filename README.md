@@ -10,3 +10,11 @@
 * в папку data помещен файл формата .json
 * произведено тестирование указанных классов
 * реализована подгрузка данных по категориями и товарам из файла .JSON
+
+## Тестирвание 
+#  File	statements	missing	excluded	coverage
+# src\__init__.py	0	0	0	100%
+# src\category.py	12	0	0	100%
+# src\product.py	10	0	0	100%
+# src\utils.py	24	11	0	54%
+# Total	46	11	0	76%
