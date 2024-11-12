@@ -1,33 +1,31 @@
 import json
 import os
-from config import DATA_DIR
-from src.product import Product
+from typing import Any
+
 from src.category import Category
-
-products_path = os.path.join(DATA_DIR, "products.json")
-
-
-def read_json(path: str) -> dict:
-    """Читаем данные из JSON файла"""
-    with open(products_path, "r", encoding="utf-8") as file:
-        data = json.load(file)
-    return data
+from src.product import Product
 
 
-def create_objects_from_json(data):
-    """Выгрузка данных по категориям из JSON файла"""
+def get_data_by_products(file_path: str = "../data/products.json") -> Any:
+    full_path = os.path.abspath(file_path)
+    result = []
+    try:
+        with open(full_path, "r", encoding="utf-8") as f_obj:
+            result = json.load(f_obj)
+    except FileNotFoundError:
+        print("Файл не найден")
+        return result
+    else:
+        return result
+
+
+def create_object_products(data_products: list[dict]) -> list[Category]:
     categories = []
-    for category in data:
+    for data_product in data_products:
         products = []
-        for product in category["products"]:
+        for product in data_product["products"]:
             products.append(Product(**product))
-        category["products"] = products
-        categories.append(Category(**category))
+        data_product["products"] = products
+        categories.append(Category(**data_product))
+
     return categories
-
-
-if __name__ == '__main__':
-    raw_data = read_json(products_path)
-    # print(raw_data)
-    categories_data = create_objects_from_json(raw_data)
-    print(categories_data)
